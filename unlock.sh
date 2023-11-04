@@ -1,4 +1,7 @@
 #!/bin/bash
-modprobe msr
 apt-get install msr-tools
-wrmsr -a 0x1a0 0x850089 && echo 0 | tee /sys/devices/system/cpu/intel_pstate/no_turbo
+modprobe msr
+cat << EOF >> /etc/rc.local
+modprobe msr
+wrmsr 0x1FC "$(printf '0x%x' "$(( 0x$(sudo rdmsr 0x1FC) & 0xFFFFFFFE ))")"
+EOF
