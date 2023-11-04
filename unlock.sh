@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-get install msr-tools
 
-cat << EOF >> /etc/rc.local
+cat << 'EOF' >> /etc/rc.local
 ## make sure msr module loaded
 modprobe msr
 ## unlock
